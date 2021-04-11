@@ -1,0 +1,9 @@
+{
+  "background_color": "#ffffff",
+  "theme_color": "#E938C2",
+  "name": "Procesos numericos",
+  "short_name": "Procesos numericos",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": []
+}
