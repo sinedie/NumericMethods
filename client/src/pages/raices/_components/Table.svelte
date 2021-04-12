@@ -4,6 +4,8 @@
   $: console.log(table);
 </script>
 
+<h1>PROCEDIMIENTO</h1>
+
 <table>
   <thead>
     {#each encabezado as title}
@@ -25,7 +27,7 @@
 
 <style>
   table {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
   }
   th,

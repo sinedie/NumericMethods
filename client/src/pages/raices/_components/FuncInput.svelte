@@ -44,9 +44,9 @@
 <style>
   .container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
   .utils {
-    display: grid;
+    display: flex;
   }
 </style>

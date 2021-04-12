@@ -39,15 +39,14 @@
 
 <div class="container">
   <div class="table">
-    <div>
-      {raiz}
-    </div>
+    <h1>RAIZ</h1>
     <div>
       {message}
     </div>
-    <Table table={procedimiento} encabezado={["x", "f(x)", `Error ${err}`]} />
   </div>
   <div class="info">
+    <h1>PROPIEDADES</h1>
+
     <label>
       Coordenada inicial del intervalo
       <input type="text" bind:value={xi} />
@@ -72,14 +71,12 @@
       <input type="text" bind:value={n_max_iter} />
     </label>
   </div>
+  {#if procedimiento.length}
+    <Table table={procedimiento} encabezado={["x", "f(x)", `Error ${err}`]} />
+  {/if}
 </div>
 
 <style>
-  .container {
-    margin-top: 10%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
   label {
     display: grid;
     grid-template-columns: 1fr 1fr;

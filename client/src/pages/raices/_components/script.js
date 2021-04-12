@@ -1,6 +1,12 @@
-async function fetchAPI(url, method, body) {
+async function fetchAPI(endpoint, method, body) {
   try {
-    let httpResponse = await fetch(`http://localhost:5000/api${url}`, {
+    console.log(__myapp);
+    const api_url = __myapp.env.isProd
+      ? __myapp.env.API_URL
+      : __myapp.env.LOCAL_API;
+    const url = `${api_url}${endpoint}`;
+
+    let httpResponse = await fetch(url, {
       method,
       mode: "cors",
       headers: {

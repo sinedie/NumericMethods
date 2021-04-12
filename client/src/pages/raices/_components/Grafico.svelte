@@ -20,4 +20,30 @@
   }
 </script>
 
-<img {src} alt="Representacion grafica de la funcion" />
+<div class="container">
+  <img {src} alt="Representacion grafica de la funcion" />
+
+  <div class="inputs">
+    <div>
+      <h4>Ordenada inicial</h4>
+      <input type="text" bind:value={xi} />
+    </div>
+    <div>
+      <h4>Ordenada final</h4>
+      <input type="text" bind:value={xf} />
+    </div>
+  </div>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+  }
+</style>

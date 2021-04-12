@@ -9,38 +9,50 @@
   let func = "x + 100";
   let func_g = "100";
   let method;
-  let xi = 0;
-  let xf = 100;
 </script>
 
-<div class="label">
-  F(X) =
-  <FuncInput bind:func />
+<div class="datos">
+  <div>
+    <div>
+      <h1>METODO</h1>
+      <select bind:value={method}>
+        <option value="biseccion">Biseccion</option>
+        <option value="punto_fijo">Punto Fijo</option>
+        <option value="newton">Newthon raphson</option>
+        <option value="secante">Secante</option>
+      </select>
+    </div>
+    <div class="label">
+      <h1>F(X)</h1>
+      <FuncInput bind:func />
+    </div>
+    <div class="label">
+      {#if method == "punto_fijo"}
+        <h1>G(X)</h1>
+        <FuncInput bind:func={func_g} />
+      {/if}
+    </div>
+    <h1>GRAFICA</h1>
+    <Grafico {func} />
+  </div>
+
+  <div>
+    {#if method == "biseccion"}
+      <Biseccion bind:func />
+    {:else if method == "punto_fijo"}
+      <PuntoFijo bind:func bind:func_g />
+    {:else if method == "newton"}
+      <Newton bind:func />
+    {:else if method == "secante"}
+      <Secante bind:func />
+    {/if}
+  </div>
 </div>
-<div class="label">
-  {#if method == "punto_fijo"}
-    G(X) =
-    <FuncInput bind:func={func_g} />
-  {/if}
-</div>
 
-<select bind:value={method}>
-  <option value="biseccion">Biseccion</option>
-  <option value="punto_fijo">Punto Fijo</option>
-  <option value="newton">Newthon raphson</option>
-  <option value="secante">Secante</option>
-</select>
-
-<input type="text" bind:value={xi} />
-<input type="text" bind:value={xf} />
-<Grafico {func} {xi} {xf} />
-
-{#if method == "biseccion"}
-  <Biseccion bind:func />
-{:else if method == "punto_fijo"}
-  <PuntoFijo bind:func bind:func_g />
-{:else if method == "newton"}
-  <Newton bind:func />
-{:else if method == "secante"}
-  <Secante bind:func />
-{/if}
+<style>
+  .datos {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+</style>

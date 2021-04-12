@@ -10,6 +10,8 @@ import getConfig from "@roxi/routify/lib/utils/config";
 import autoPreprocess from "svelte-preprocess";
 import postcssImport from "postcss-import";
 import { injectManifest } from "rollup-plugin-workbox";
+import { config } from "dotenv";
+import replace from "@rollup/plugin-replace";
 
 // const { distDir } = getConfig() // use Routify's distDir for SSOT
 const distDir = "../server/spa";
@@ -55,6 +57,15 @@ export default {
     chunkFileNames: `[name]${(production && "-[hash]") || ""}.js`,
   },
   plugins: [
+    replace({
+      // stringify the object
+      __myapp: JSON.stringify({
+        env: {
+          isProd: production,
+          ...config().parsed, // attached the .env config
+        },
+      }),
+    }),
     svelte({
       dev: !production, // run-time checks
       // Extract component CSS — better performance

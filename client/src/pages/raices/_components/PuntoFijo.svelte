@@ -37,17 +37,20 @@
   }
 </script>
 
-<div class="container">
+<div class="prop">
   <div class="table">
-    <div>
-      {raiz}
-    </div>
-    <div>
-      {message}
-    </div>
-    <Table table={procedimiento} encabezado={["x", "f(x)", `Error ${err}`]} />
+    {#if message}
+      <h1>RAIZ</h1>
+      <div>
+        {message}
+      </div>
+    {:else}
+      <div>No se pudo solucionar. Revisa los inputs</div>
+    {/if}
   </div>
+
   <div class="info">
+    <h1>PROPIEDADES</h1>
     <label>
       Coordenada inicial
       <input type="text" bind:value={xi} />
@@ -68,14 +71,12 @@
       <input type="text" bind:value={n_max_iter} />
     </label>
   </div>
+  {#if procedimiento.length}
+    <Table table={procedimiento} encabezado={["x", "f(x)", `Error ${err}`]} />
+  {/if}
 </div>
 
 <style>
-  .container {
-    margin-top: 10%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
   label {
     display: grid;
     grid-template-columns: 1fr 1fr;
