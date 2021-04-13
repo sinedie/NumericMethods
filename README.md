@@ -10,3 +10,8 @@ metodos numericos
 # NOTA
 
 Es un trabajo en progreso
+
+# PRIMERA ENTREGA
+
+El problema a solucionar con los metodos de busqueda de raices es la revision de
+una seccion de concreto doblemente reforzada.
