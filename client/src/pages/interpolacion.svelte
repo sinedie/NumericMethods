@@ -63,6 +63,8 @@
           proc,
         };
       });
+
+      error = null
     } catch (e) {
       error = e;
     }
