@@ -10,11 +10,10 @@ import getConfig from "@roxi/routify/lib/utils/config";
 import autoPreprocess from "svelte-preprocess";
 import postcssImport from "postcss-import";
 import { injectManifest } from "rollup-plugin-workbox";
-import { config } from "dotenv";
-import replace from "@rollup/plugin-replace";
 
-// const { distDir } = getConfig() // use Routify's distDir for SSOT
-const distDir = "../server/spa";
+getConfig();
+
+const distDir = "../server/spa"; // getConfig(); // use Routify's distDir for SSOT
 const assetsDir = "assets";
 const buildDir = `${distDir}/build`;
 const isNollup = !!process.env.NOLLUP;
@@ -31,11 +30,11 @@ const serve = () => ({
       entrypoint: `${assetsDir}/__app.html`,
       script: `${buildDir}/main.js`,
     };
-    spassr({ ...options, port: 5000 });
+    spassr({ ...options, port: 3000 });
     spassr({
       ...options,
       ssr: true,
-      port: 5005,
+      port: 3005,
       ssrOptions: { inlineDynamicImports: true, dev: true },
     });
   },
@@ -57,19 +56,8 @@ export default {
     chunkFileNames: `[name]${(production && "-[hash]") || ""}.js`,
   },
   plugins: [
-    replace({
-      // stringify the object
-      __myapp: JSON.stringify({
-        env: {
-          isProd: production,
-          ...config().parsed, // attached the .env config
-        },
-      }),
-    }),
     svelte({
-      dev: !production, // run-time checks
-      // Extract component CSS — better performance
-      css: (css) => css.write(`bundle.css`),
+      emitCss: false,
       hot: isNollup,
       preprocess: [
         autoPreprocess({
@@ -93,7 +81,10 @@ export default {
     {
       // provide node environment on the client
       transform: (code) => ({
-        code: code.replace("process.env.NODE_ENV", `"${process.env.NODE_ENV}"`),
+        code: code.replace(
+          /process\.env\.NODE_ENV/g,
+          `"${process.env.NODE_ENV}"`
+        ),
         map: { mappings: "" },
       }),
     },

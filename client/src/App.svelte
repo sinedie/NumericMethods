@@ -5,6 +5,7 @@
 
 <style  global>
   @import "../assets/global.css";
+  @import "carbon-components-svelte/css/all.css";
 </style>
 
 <Router {routes} />
